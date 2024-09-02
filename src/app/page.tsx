@@ -15,7 +15,7 @@ interface SocialLink {
 }
 
 type TechStack = {
-  image: StaticImageData; // atau tipe lain jika bukan string, misalnya: ImageType
+  image: StaticImageData;
   name: string;
 };
 
@@ -101,9 +101,8 @@ export default function Home() {
           scrollTrigger: {
             trigger: elm,
             toggleActions: "play reverse play reverse",
-            start: "0 100%",
-            end: "bottom 60%",
-
+            start: "top 100%",
+            end: "bottom 70%",
             scrub: true,
           },
         }
