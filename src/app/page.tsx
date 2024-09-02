@@ -180,7 +180,9 @@ export default function Home() {
 
         {socialLink.map((elm, idx) => {
           return (
-            <div className="flex justify-center items-center overflow-hidden">
+            <div
+              key={idx}
+              className="flex justify-center items-center overflow-hidden">
               <div
                 ref={(element) => {
                   social.current[idx] = element;
