@@ -54,8 +54,6 @@ const works: Works[] = [
 ];
 
 export default function Home() {
-  // const sectionRef = useRef(null);
-  // const triggerRef = useRef(null);
   const imageHero = useRef<HTMLImageElement>(null);
   const textAbout = useRef<(HTMLSpanElement | null)[]>([]);
   const textSocial = useRef<(HTMLSpanElement | null)[]>([]);
@@ -64,6 +62,12 @@ export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
+    const textAnimationElements = [
+      textAbout.current,
+      textSocial.current,
+      social.current,
+    ];
+
     gsap.fromTo(
       imageHero.current,
       {
@@ -74,50 +78,43 @@ export default function Home() {
         duration: 1,
         stagger: 0.1,
         ease: "power4.inOut",
-        scrollTrigger: {
-          trigger: imageHero.current,
-          toggleActions: "play none none none",
-          markers: true,
-          start: "0 95%",
-        },
+        // scrollTrigger: {
+        //   trigger: imageHero.current,
+        //   toggleActions: "play none none none",
+        //   // markers: true,
+        //   start: "0 95%",
+        // },
       }
     );
 
-    gsap.fromTo(
-      [textAbout.current, textSocial.current, ...social.current],
-      {
-        yPercent: "120",
-      },
-      {
-        yPercent: "0",
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.inOut",
-        scrollTrigger: {
-          trigger: textAbout.current,
-          toggleActions: "play none none none",
-          start: "0 95%",
-          markers: true,
+    textAnimationElements.forEach((elm, idx) => {
+      gsap.fromTo(
+        elm,
+        {
+          yPercent: "120",
         },
-      }
-    );
+        {
+          yPercent: "0",
+          duration: 1,
+          stagger: 0.1,
+          ease: "power4.inOut",
+          scrollTrigger: {
+            trigger: elm,
+            toggleActions: "play reverse play reverse",
+            start: "0 100%",
+            end: "bottom 60%",
+            markers: true,
+            scrub: true,
+          },
+        }
+      );
+    });
   }, []);
 
   return (
     <main className="">
       <section className="mb-16 md:mb-40">
         <Hero></Hero>
-      </section>
-
-      <section className="mb-20 md:mb-72">
-        <div className="overflow-hidden flex justify-end ">
-          <Image
-            src={MySelf}
-            alt="Ahmad Nasser Ambari"
-            ref={imageHero}
-            className="inline-block"
-          />
-        </div>
       </section>
 
       <section className="mb-20 md:mb-72">
@@ -175,7 +172,7 @@ export default function Home() {
 
       <section className="h-screen mb-20 md:mb-72">
         <h3 className="text-5xl md:text-8xl text-center mb-8">
-          <SplitText ref={textSocial} text="Find my social" />
+          <SplitText center={true} ref={textSocial} text="Find my social" />
         </h3>
 
         {socialLink.map((elm, idx) => {
