@@ -1,113 +1,197 @@
-import Image from "next/image";
+"use client";
+import React, { ReactNode, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image, { StaticImageData } from "next/image";
+import Hero from "./components/Hero";
+import MySelf from "./assets/thisisme.png";
+import Jobify from "./assets/jobify.png";
+import ReactLogo from "./assets/ReactLogoMini.png";
+import SplitText from "./components/ui/SplitText";
+import { isEven } from "./libs/func";
+
+interface SocialLink {
+  social: string;
+}
+
+type TechStack = {
+  image: StaticImageData; // atau tipe lain jika bukan string, misalnya: ImageType
+  name: string;
+};
+
+interface Works {
+  image: StaticImageData;
+  name: string;
+  techStack: TechStack[];
+}
+
+const socialLink: SocialLink[] = [
+  {
+    social: "Linkedin",
+  },
+  {
+    social: "Github",
+  },
+  {
+    social: "Instagram",
+  },
+  {
+    social: "Whatsapp",
+  },
+];
+
+const works: Works[] = [
+  {
+    image: Jobify,
+    name: "Jobify",
+    techStack: [{ image: ReactLogo, name: "react" }],
+  },
+  {
+    image: Jobify,
+    name: "Jobify",
+    techStack: [{ image: ReactLogo, name: "react" }],
+  },
+];
 
 export default function Home() {
+  // const sectionRef = useRef(null);
+  // const triggerRef = useRef(null);
+  const imageHero = useRef<HTMLImageElement>(null);
+  const textAbout = useRef<(HTMLSpanElement | null)[]>([]);
+  const textSocial = useRef<(HTMLSpanElement | null)[]>([]);
+  const social = useRef<(HTMLDivElement | null)[]>([]);
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  useEffect(() => {
+    gsap.fromTo(
+      imageHero.current,
+      {
+        yPercent: "120",
+      },
+      {
+        yPercent: "0",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.inOut",
+        scrollTrigger: {
+          trigger: imageHero.current,
+          toggleActions: "play none none none",
+          markers: true,
+          start: "0 95%",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      [textAbout.current, textSocial.current, ...social.current],
+      {
+        yPercent: "120",
+      },
+      {
+        yPercent: "0",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.inOut",
+        scrollTrigger: {
+          trigger: textAbout.current,
+          toggleActions: "play none none none",
+          start: "0 95%",
+          markers: true,
+        },
+      }
+    );
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="">
+      <section className="mb-16 md:mb-40">
+        <Hero></Hero>
+      </section>
+
+      <section className="mb-20 md:mb-72">
+        <div className="overflow-hidden flex justify-end ">
+          <Image
+            src={MySelf}
+            alt="Ahmad Nasser Ambari"
+            ref={imageHero}
+            className="inline-block"
+          />
         </div>
-      </div>
+      </section>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <section className="mb-20 md:mb-72">
+        <h3 className="text-2xl md:text-6xl">
+          <SplitText
+            ref={textAbout}
+            text="strong foundation in website development especially in front-end web development using javascript, not only that I am also experienced in planning event creation in building brand awareness. "
+          />
+        </h3>
+      </section>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      <section className="mb-20 md:mb-72">
+        {works.map((elm, idx) => {
+          return (
+            <div
+              key={idx}
+              className="grid grid-cols-1 lg:grid-cols-2 mb-32 lg:mb-60">
+              <div
+                className={`overflow-hidden mb-4 md:mb-0 
+                  ${isEven(idx) ? "lg:order-last" : ""}`}>
+                <Image src={elm.image} alt={elm.name} className="rounded-3xl" />
+              </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+              <div
+                className={`flex justify-center items-center flex-col ${
+                  isEven(idx) ? " lg:items-start" : " lg:items-end"
+                }`}>
+                <h4 className="text-center text-4xl md:text-9xl mb-4 font-bold">
+                  Jobify
+                </h4>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+                <div className="flex gap-4 mb-4">
+                  {elm.techStack.map((elm, idx) => {
+                    return (
+                      <div key={idx} className="w-8 md:w-full">
+                        <Image src={elm.image} alt={elm.name} />
+                      </div>
+                    );
+                  })}
+                </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+                <div className="flex gap-8">
+                  <button className="py-2 px-4 md:py-4 md:px-8 border border-white rounded-full">
+                    View Project
+                  </button>
+                  <button className="py-2 px-4 md:py-4 md:px-8 border border-white rounded-full">
+                    Github
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      <section className="h-screen mb-20 md:mb-72">
+        <h3 className="text-5xl md:text-8xl text-center mb-8">
+          <SplitText ref={textSocial} text="Find my social" />
+        </h3>
+
+        {socialLink.map((elm, idx) => {
+          return (
+            <div className="flex justify-center items-center overflow-hidden">
+              <div
+                ref={(element) => {
+                  social.current[idx] = element;
+                }}
+                className="flex min-w-full md:min-w-[42rem] justify-between py-4 border-b border-b-white ">
+                <div>{elm.social}</div>
+              </div>
+            </div>
+          );
+        })}
+      </section>
     </main>
   );
 }
