@@ -103,7 +103,7 @@ export default function Home() {
             toggleActions: "play reverse play reverse",
             start: "0 100%",
             end: "bottom 60%",
-            markers: true,
+
             scrub: true,
           },
         }
