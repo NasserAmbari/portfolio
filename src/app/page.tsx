@@ -68,7 +68,7 @@ export default function Home() {
 
   const imageHero = useRef<HTMLImageElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const elementTextAnimation = [
       ...text.current,
       ...image.current,
@@ -100,7 +100,7 @@ export default function Home() {
       { scale: 1.2 },
       {
         scale: 1,
-        // yPercent: "0",
+        borderRadius: "1.5rem",
         scrollTrigger: {
           scrub: 1,
           trigger: imageHero.current,
@@ -134,7 +134,7 @@ export default function Home() {
             src={Theisme}
             alt="this is me"
             ref={imageHero}
-            className="w-full"
+            className="w-full mb-6"
           />
         </div>
         <h3 className="text-3xl md:text-6xl">
@@ -170,7 +170,7 @@ export default function Home() {
                 className={`flex justify-center items-center flex-col ${
                   isEven(idx) ? " lg:items-start" : " lg:items-end"
                 }`}>
-                <h4 className="text-center text-4xl md:text-9xl mb-4 font-bold">
+                <h4 className="text-center text-6xl md:text-9xl mb-4 font-bold">
                   <SplitText
                     center={true}
                     ref={(ref: HTMLSpanElement) => {
@@ -183,7 +183,9 @@ export default function Home() {
                 <div className="flex gap-4 mb-4">
                   {elm.techStack.map((elm, idx) => {
                     return (
-                      <div key={idx} className="w-8 md:w-full overflow-hidden">
+                      <div
+                        key={idx}
+                        className="w-8 md:w-full overflow-hidden mb-4">
                         <Image
                           ref={(ref: HTMLImageElement) => {
                             image.current.push(ref);
