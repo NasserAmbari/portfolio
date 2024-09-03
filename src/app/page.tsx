@@ -107,7 +107,6 @@ export default function Home() {
           toggleActions: "play none none none",
           start: "top center",
           end: "bottom center",
-          markers: true,
         },
       }
     );
