@@ -12,12 +12,12 @@ const SplitText = forwardRef(
           center ? "justify-center" : "justify-start"
         }`}>
         {text.split(" ").map((elm, idx) => (
-          <span key={idx} className="py-0 lg:py-2 overflow-hidden block">
+          <span key={idx} className="overflow-hidden block">
             <span
               ref={(elm) => {
-                internalRefs.current[idx] = elm;
+                internalRefs.current.push(elm);
               }}
-              className="mr-2 md:mr-4 inline-block">
+              className="mr-2 md:mr-4 py-2 lg:py-4 inline-block">
               {elm}
             </span>
           </span>

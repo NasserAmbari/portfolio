@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${jakartaSans.className} bg-black text-white font-light`}>
+        className={`${jakartaSans.className} bg-black text-white font-light max-w-screen-2xl overflow-x-hidden mx-auto`}>
         <div className="md:mx-8 mx-4">
           <Navbar></Navbar>
           {children}
