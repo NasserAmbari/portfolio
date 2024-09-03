@@ -69,13 +69,13 @@ export default function Home() {
   const imageHero = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    const elementAnimation = [
+    const elementTextAnimation = [
       ...text.current,
       ...image.current,
       ...button.current,
     ];
 
-    elementAnimation.forEach((elm) => {
+    elementTextAnimation.forEach((elm) => {
       gsap.fromTo(
         elm,
         {
@@ -83,12 +83,13 @@ export default function Home() {
         },
         {
           yPercent: "0",
-          stagger: 0.1,
+          stagger: 0.125,
+          duration: 1.1,
           ease: "power4.inOut",
           scrollTrigger: {
             trigger: elm,
             toggleActions: "play none none none",
-            start: "top 90%",
+            start: "top 100%",
           },
         }
       );

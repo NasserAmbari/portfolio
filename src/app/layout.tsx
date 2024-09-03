@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { SmoothScrolling } from "./components/ui";
 
 import Navbar from "./components/Navbar";
 
@@ -20,10 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${jakartaSans.className} bg-black text-white font-light max-w-screen-2xl overflow-x-hidden mx-auto`}>
-        <div className="md:mx-8 mx-4">
-          <Navbar></Navbar>
-          {children}
-        </div>
+        <SmoothScrolling>
+          <div className="md:mx-8 mx-4">
+            <Navbar></Navbar>
+            {children}
+          </div>
+        </SmoothScrolling>
       </body>
     </html>
   );
