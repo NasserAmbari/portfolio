@@ -84,7 +84,7 @@ export default function Home() {
         {
           yPercent: "0",
           stagger: 0.125,
-          duration: 1.1,
+          duration: 1.3,
           ease: "power4.inOut",
           scrollTrigger: {
             trigger: elm,
@@ -97,16 +97,15 @@ export default function Home() {
 
     gsap.fromTo(
       imageHero.current,
-      { scale: 1.2 },
+      { scale: 1.5 },
       {
         scale: 1,
         borderRadius: "1.5rem",
         scrollTrigger: {
           scrub: 1,
           trigger: imageHero.current,
-          toggleActions: "play none none none",
-          start: "top center",
-          end: "bottom center",
+          start: "top 100%",
+          end: "center center",
         },
       }
     );
@@ -114,7 +113,7 @@ export default function Home() {
 
   return (
     <main className="">
-      <section className="mb-16 md:mb-40">
+      <section className="mb-20 md:mb-40">
         <div className="flex justify-center items-center min-h-[calc(100vh-10rem)]">
           <h1 className="font-light text-5xl md:text-6xl lg:text-8xl flex justify-center items-center flex-col">
             <SplitText
@@ -129,7 +128,7 @@ export default function Home() {
       </section>
 
       <section className="mb-20 md:mb-72">
-        <div className="">
+        <div className="overflow-x-hidden">
           <Image
             src={Theisme}
             alt="this is me"

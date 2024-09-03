@@ -17,7 +17,7 @@ const SplitText = forwardRef(
               ref={(elm) => {
                 internalRefs.current.push(elm);
               }}
-              className="mr-2 md:mr-4 pb-2 lg:py-4 inline-block">
+              className="mx-2 pb-2 lg:py-4 inline-block">
               {elm}
             </span>
           </span>
